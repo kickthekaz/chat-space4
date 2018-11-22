@@ -1,0 +1,10 @@
+.messages
+  = render partial: 'message', collection: @messages
+
+.chat__form
+  = form_for [@group, @message] do |f|
+  = f.text_field :message, class: "chat__form_text", placeholder: "type a message"
+  = f.label :image, class: "chat__form_icon"
+    = fa_icon("photo")
+    = f.file_field :image, class: "chat__form_input"
+  = f.submit :"send", class: "chat__form_button"
