@@ -1,9 +1,12 @@
 .chat
-  .chat__tittle
-    %ul.chat__tittle_group
-      %li sampleグループ
-      %li.chat__tittle_user kaz
-    %button.chat__tittle_button Edit
+  .chat__header
+    %ul.chat__header__left
+      %li.chat__header_group
+        = group.name(1)
+      %li.chat__header_user
+        "= @group.users.name"
+    %button.chat__header_button
+      = link_to 'Edit', edit_group_path(1)
   .chat__room
     .chat__room_user
         = message.user.name
@@ -11,6 +14,15 @@
         = format_posted_time(message.created_at)
     .chat__room_anser
       - if message.content.present?
-        %p.lower-message__content
+        %p.chat__room_anser
           = message.content
       = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+  .chat__form
+    = form_for [@group, @message] do |f|
+      .chat__form_left
+        = f.text_field :content, class: "chat__form_text", placeholder: "type a message"
+        = f.label :image, class: "chat__form_icon"
+          = fa_icon("photo")
+          = f.file_field :image, class: "chat__form_input"
+      .chat__form_right
+        = f.submit :"send", class: "chat__form_button"
