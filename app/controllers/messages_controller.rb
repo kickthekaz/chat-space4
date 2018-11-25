@@ -15,16 +15,11 @@ class MessagesController < ApplicationController
       flash.now[:alert] = 'メッセージを入力してください。'
       render :index
     end
-    respond_to do |format|
-      format.html { redirect_to message_path(params[:message_id])  }
-      format.json
-    end
-
   end
 
   private
 
-  def create_params
+  def message_params
     params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
   end
 

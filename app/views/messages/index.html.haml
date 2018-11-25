@@ -1,31 +1,26 @@
 .wrapper
   = render partial: 'shared/side_bar'
 
-.messages
-  = render partial: 'message', collection: @messages
-
 .chat
   .chat__header
     %ul.chat__header__left
       %li.chat__header_group
-        "= group.name"
+        = @group.name
       %li.chat__header_user
-        "= @group.users.name"
+        = @group.users.name
     %button.chat__header_button
-      = link_to 'Edit', edit_group_path(1)
+      = link_to 'Edit', edit_group_path(@group)
+
   .chat__room
-    .chat__room_user
-      "= message.user.name"
-    .chat__room_day
-      "= format_posted_time(message.created_at)"
-    .chat__room_anser
-      "- if message.content.present?
+    = render partial: 'message', collection: @messages
+
   .chat__form
     = form_for [@group, @message] do |f|
       .chat__form_left
-        = f.text_field :content, class: "chat__form_text", placeholder: "type a message"
-        = f.label :image, class: "chat__form_icon"
-        = fa_icon("photo")
-        = f.file_field :image, class: "chat__form_input"
+        .chat__form_text
+          = f.text_field :content, class: "chat__form_fieid", placeholder: "type a message"
+          = f.label :image, class: "chat__form_icon" do
+            = fa_icon("photo")
+            = f.file_field :image, class: "chat__form_hidden"
       .chat__form_right
         = f.submit "send", class: "chat__form_button"

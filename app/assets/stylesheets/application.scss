@@ -5,9 +5,13 @@
 @import "modules/user";
 @import "modules/group";
 
+a:link    { color:#FFFFFF; text-decoration:none }
+a:visited { color:#FFFFFF; text-decoration:none }
+a:hover   { color:#FFFFFF; text-decoration:none }
+a:active  { color:#FFFFFF; text-decoration:none }
+
 .side-bar {
   width: 300px;
-  height: 100%;
   background: #2f3e51;
   color: #FFFFFF;
   float: left;
@@ -42,7 +46,7 @@
     }
 
 .chat{
-  height: 100%;
+  height: 100vh;
   width: calc(100% - 300px);
   float: right;
 }
@@ -68,14 +72,16 @@
       height: 40px;
       padding: 0 20px 0 20px;
       margin: 28px 40px 0 0;
-      border: 2px solid #38AEF0;
+      border: none;
       color: #38AEF0;
+      background: #38AEF0;
     }
   .chat__room{
     padding: 46px 0 0 40px;
     border-top: 1px solid #eeeeee;
-    height: calc(100vh - 100px - 90px);
+    height: calc(100% - 100px - 90px);
     box-sizing: border-box;
+    overflow: auto;
   }
     .chat__room_user{
       font-size: 16px;
@@ -100,35 +106,41 @@
     background: #DDDDDD;
     font-size: 16px;
     height: 90px;
+    padding: 20px 50px 20px 40px;
+    width: 100%;
   }
     .chat__form_left{
       float: left;
-      width: calc(100% - 150px);
+      width: 80% ;
     }
       .chat__form_text{
-        box-sizing: border-box;
-        padding-right: 10px;
         color: #434A54;
-        margin: 20px 0 20px 40px;
-        height: 50px;
         border: none;
       }
-      .chat__form_icon{
-        top: 30px;
-        right: 30px;
-      }
-      .chat__form_input{
-        display:none;
-      }
+        .chat__form_fieid{
+        height: 50px;
+        padding-left: 20px;
+        width: 90%;
+        box-sizing: border-box;
+        }
+        .chat__form_icon{
+          line-height: 50px;
+          font-size: 20px;
+          float: right;
+          width: 10%;
+        }
+          .chat__form_hidden{
+            display:none;
+          }
     .chat__form_right{
-    float: right;
+      float: right;
+      width: 10%;
     }
       .chat__form_button{
+        line-height: 50px;
         box-sizing: border-box;
         background: #38AEF0;
         color: #FFFFFF;
-        height: 50px;
         border: none;
-        margin: 20px 40px 20px 15px;
-        padding: 0 20px 0 20px;
+        padding: 0 20px;
       }
