@@ -13,9 +13,10 @@
 
   .chat__room
     = render partial: 'message', collection: @messages
+    .target_point
 
   .chat__form
-    = form_for [@group, @message] do |f|
+    = form_for [@group, @message], html: {id: 'new_message'} do |f|
       .chat__form_left
         .chat__form_text
           = f.text_field :content, class: "chat__form_fieid", placeholder: "type a message"
