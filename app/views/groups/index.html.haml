@@ -1,21 +1,2 @@
 .wrapper
-  = render partial: 'side_bar'
-
-.chat
-  .chat__tittle
-    %ul.chat__tittle_group
-      %li sampleグループ
-      %li.chat__tittle_user kaz
-    %button.chat__tittle_button Edit
-  .chat__room
-    %ul
-      %li.chat__room_user kaz
-      %li.chat__room_day yi
-    %ul
-      %li.chat__room_anser こんちは
-
-  %form.chat__form
-    %textarea{class: "chat__form_text", placeholder: " type a message "}
-    %label{class: "chat__form_icon", for: "icon"}= fa_icon("photo")
-    %input{class: "chat__form_input", id: "icon",type: "file"}
-    %button.chat__form_button send
+  = render partial: 'shared/side_bar'

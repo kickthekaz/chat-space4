@@ -1,10 +1,27 @@
-.messages
-  = render partial: 'message', collection: @messages
+.wrapper
+  = render partial: 'shared/side_bar'
 
-.chat__form
-  = form_for [@group, @message] do |f|
-  = f.text_field :message, class: "chat__form_text", placeholder: "type a message"
-  = f.label :image, class: "chat__form_icon"
-    = fa_icon("photo")
-    = f.file_field :image, class: "chat__form_input"
-  = f.submit :"send", class: "chat__form_button"
+.chat
+  .chat__header
+    %ul.chat__header__left
+      %li.chat__header_group
+        = @group.name
+      %li.chat__header_user
+        = @group.users.name
+    %button.chat__header_button
+      = link_to 'Edit', edit_group_path(@group)
+
+  .chat__room
+    = render partial: 'message', collection: @messages
+    .target_point
+
+  .chat__form
+    = form_for [@group, @message], html: {id: 'new_message'} do |f|
+      .chat__form_left
+        .chat__form_text
+          = f.text_field :content, class: "chat__form_fieid", placeholder: "type a message"
+          = f.label :image, class: "chat__form_icon" do
+            = fa_icon("photo")
+            = f.file_field :image, class: "chat__form_hidden"
+      .chat__form_right
+        = f.submit "send", class: "chat__form_button"
