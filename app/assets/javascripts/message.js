@@ -28,10 +28,8 @@ $(function(){
     })
     .done(function(message){
       var html = buildHTML(message);
-      // var targetTop = $('.target_point').offset().top;
       $('.chat__room').append(html)
       $('.chat__form_button').prop('disabled', false)
-      // $('.chat__room').animate({scrollTop: targetTop},"fast","swing");
     })
     .fail(function(massage){
       alert('メッセージを入力してください。');
@@ -61,13 +59,14 @@ $(function(){
       dataType: 'json'
     })
     .done(function(json) {
-    console.log(json)
       var insertHTML = '';
       json.messages.forEach(function(message){
         insertHTML += buildHTML(message);
-        var html = buildHTML(message);
         $('.chat__room').html(insertHTML);
       });
     })
+    .fail(function(json) {
+    alert('自動更新に失敗しました');
+    });
   } , 5000 );
 })
