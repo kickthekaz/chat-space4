@@ -1,5 +1,4 @@
 $(function() {
- console.log('aaa')
   var search_user = $("#user-search-result");
   var add_user = $("#user-add-result");
 
@@ -29,7 +28,6 @@ $(function() {
 
   $("#user_ids").on("keyup", function() {
     var input = $("#user_ids").val();
-    console.log(input)
     $.ajax({
       type: 'GET',
       url: '/users',
@@ -45,15 +43,6 @@ $(function() {
               $("#appendUsers").empty();
                 appendaddUser(user);
             });
-            // $(document).on("submit","#chat-group-user-8",function() {
-            //     var user_ids = $("#chat-group-user-8").val();
-            //     $.ajax({
-            //       type: 'POST',
-            //       url: '/groups/:id',
-            //       data: { user_ids },
-            //       dataType: 'json'
-            //     })
-            // });
         });
       }
       else{

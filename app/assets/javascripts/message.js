@@ -28,10 +28,10 @@ $(function(){
     })
     .done(function(message){
       var html = buildHTML(message);
-      var targetTop = $('.target_point').offset().top;
+      // var targetTop = $('.target_point').offset().top;
       $('.chat__room').append(html)
       $('.chat__form_button').prop('disabled', false)
-      $('.chat__room').animate({scrollTop: targetTop},"fast","swing");
+      // $('.chat__room').animate({scrollTop: targetTop},"fast","swing");
     })
     .fail(function(massage){
       alert('メッセージを入力してください。');
@@ -42,10 +42,10 @@ $(function(){
 $(function(){
   function buildHTML(message){
     var html = `<div class="chat__room_user">
-                  ${message.user_name}
+                  ${message.name}
                 </div>
                 <div class="chat__room_day">
-                  ${message.created_at}
+                  ${message.date}
                 </div>
                 <div class="chat__room_anser">
                   ${message.content}
@@ -56,19 +56,18 @@ $(function(){
 
   setInterval(function() {
     $.ajax({
-      url: '/groups/:group_id/messages'
+      url: location.href.json,
+      type: "GET",
+      dataType: 'json'
     })
     .done(function(json) {
+    console.log(json)
       var insertHTML = '';
-      json.messages.forEach(function(message) {
+      json.messages.forEach(function(message){
         insertHTML += buildHTML(message);
-        });
-        $('.chat-wrapper').html(insertHTML);
+        var html = buildHTML(message);
+        $('.chat__room').html(insertHTML);
+      });
     })
-    .fail(function(data) {
-      alert('自動更新に失敗しました');
-    });
   } , 5000 );
 })
-
-
