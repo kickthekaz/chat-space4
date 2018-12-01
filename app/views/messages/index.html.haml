@@ -7,7 +7,8 @@
       %li.chat__header_group
         = @group.name
       %li.chat__header_user
-        = @group.users.name
+        - @group.users.each do |users|
+          = users.name
     %button.chat__header_button
       = link_to 'Edit', edit_group_path(@group)
 
