@@ -65,8 +65,5 @@ $(function(){
         $('.chat__room').html(insertHTML);
       });
     })
-    .fail(function(json) {
-    alert('自動更新に失敗しました');
-    });
   } , 5000 );
 })
