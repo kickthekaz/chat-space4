@@ -28,13 +28,42 @@ $(function(){
     })
     .done(function(message){
       var html = buildHTML(message);
-      var targetTop = $('.target_point').offset().top;
       $('.chat__room').append(html)
       $('.chat__form_button').prop('disabled', false)
-      $('.chat__room').animate({scrollTop: targetTop},"fast","swing");
     })
     .fail(function(massage){
       alert('メッセージを入力してください。');
     })
   })
+})
+
+$(function(){
+  function buildHTML(message){
+    var html = `<div class="chat__room_user">
+                  ${message.name}
+                </div>
+                <div class="chat__room_day">
+                  ${message.date}
+                </div>
+                <div class="chat__room_anser">
+                  ${message.content}
+                  ${message.image}
+                </div>`
+    return html;
+  }
+
+  setInterval(function() {
+    $.ajax({
+      url: location.href.json,
+      type: "GET",
+      dataType: 'json'
+    })
+    .done(function(json) {
+      var insertHTML = '';
+      json.messages.forEach(function(message){
+        insertHTML += buildHTML(message);
+        $('.chat__room').html(insertHTML);
+      });
+    })
+  } , 5000 );
 })
