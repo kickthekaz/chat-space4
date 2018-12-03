@@ -1,7 +1,4 @@
-app_path = File.expand_path('../../', __FILE__)
-
-worker_processes 1
-
+app_path = File.expand_path('../../../', __FILE__)
 working_directory "#{app_path}/current"
 listen "#{app_path}/shared/tmp/sockets/unicorn.sock"
 pid "#{app_path}/shared/tmp/pids/unicorn.pid"
@@ -34,7 +31,7 @@ before_fork do |server, worker|
       Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH => e
       logger.error e
-    end
+    expand_path
   end
 end
 
