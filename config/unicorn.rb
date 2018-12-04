@@ -1,11 +1,10 @@
-app_path = File.expand_path('../../', __FILE__)
+app_path = File.expand_path('../../../', __FILE__)
+working_directory "#{app_path}/current"
+listen "#{app_path}/shared/tmp/sockets/unicorn.sock"
+pid "#{app_path}/shared/tmp/pids/unicorn.pid"
+stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
+stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 
-worker_processes 1
-
-working_directory app_path
-pid "#{app_path}/tmp/pids/unicorn.pid"
-stderr_path "#{app_path}/log/unicorn.stderr.log"
-stdout_path "#{app_path}/log/unicorn.stdout.log"
 
 listen 3000
 timeout 60
@@ -32,7 +31,7 @@ before_fork do |server, worker|
       Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH => e
       logger.error e
-    end
+    expand_path
   end
 end
 
